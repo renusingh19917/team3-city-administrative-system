@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import AppReport from './AppReport'; 
+import { useNavigate } from "react-router";
+
+import AppReport from '../../models/AppReport'; 
 import { addReport } from "../../services/CommunicationService";
 
 const ReportForm = () => {
+  const navigate = useNavigate();
+
   const [reportData, setReportData] = useState(new AppReport());
   const [failedReport, setFailedReport] = useState('');
 

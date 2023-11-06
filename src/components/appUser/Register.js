@@ -13,7 +13,7 @@ const Register = () => {
     const navigate = useNavigate();
 
     const handleRegister = (evt) => {
-        e.preventDefault();
+        evt.preventDefault();
         console.log(evt.target);
         setRegisterData({
             ...registerData,
@@ -22,7 +22,7 @@ const Register = () => {
     };
 
     const handleUsernameBlur = () => {
-        const isUnique = checkUniqueUser(formData.username);
+        const isUnique = checkUniqueUser(registerData.username);
         if (!isUnique) {
             setUsernameError('Username already exists. Please choose a different username.');
         } else {
@@ -32,7 +32,7 @@ const Register = () => {
 
     const handleEmailBlur = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(formData.email)) {
+        if (!emailRegex.test(registerData.email)) {
             setEmailError('Invalid email format. Please enter a valid email address.');
         } else {
             setEmailError('');

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
+
 import { getAllReports, getAllNotices } from "../../services/CommunicationService";
 
 const Communication = () => {
+    
+    const userId = JSON.parse(localStorage.getItem('currentProfile')).id;
     const [notices, setNotice] = useState([]);
     const [noticeErrMessage, setNoticeErrMessage] = useState('');
 
@@ -9,7 +13,7 @@ const Communication = () => {
     const [complaints, setComplaints] = useState([]);
 
     useEffect(() => {
-        getAllReports()
+        getAllReports(userId)
             .then((resp) => {
                 console.log(resp.data);
                 const reports = resp.data;
