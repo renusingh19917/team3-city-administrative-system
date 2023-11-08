@@ -1,24 +1,35 @@
 import axios from "axios";
 
-const commUrl = 'https://jsonplaceholder.typicode.com/comm';
+// const commUrl = 'https://jsonplaceholder.typicode.com/comm';
+const reportUrl = 'https://jsonplaceholder.typicode.com/report';
+const noticeUrl = 'https://jsonplaceholder.typicode.com/notice';
 
 const getAllReports = (userId) => {
     console.log(userId);
-    return axios.get(`${commUrl}/report/${userId}`);
+    return axios.get(`${reportUrl}/${userId}`);
 };
 
 const getAllNotices = () => {
-    return axios.get(`${commUrl}/notice`);
+    return axios.get(noticeUrl);
 };
 
 const addReport = (userReport) => {
     console.log(userReport);
-    return axios.post(`${commUrl}/report`, userReport);
+    return axios.post(reportUrl, userReport);
+};
+
+const editReport = (reportId, updatedReport) => {
+    console.log(updatedReport);
+    return axios.post(`${reportUrl}/${reportId}`, updatedReport);
+};
+
+const deleteReport = (reportId) => {
+    return axios.delete(`${reportUrl}/${reportId}`);
 };
 
 const addNotice = (adminNotice) => {
     console.log(adminNotice);
-    return axios.post(`${commUrl}/notice`, adminNotice);
+    return axios.post(noticeUrl, adminNotice);
 };
 
-export { getAllReports, getAllNotices, addReport, addNotice };
+export { getAllReports, getAllNotices, addReport, addNotice, editReport, deleteReport };

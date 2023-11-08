@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import AppUser from "../../models/AppUser";
-import { register, checkUniqueUser } from "../../services/UserService";
+import { register, getAllUsers } from "../../services/UserService";
 
 const Register = () => {
 
@@ -9,12 +9,29 @@ const Register = () => {
     const [failedRegister, setFailedRegister] = useState('');
     const [usernameError, setUsernameError] = useState('');
     const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [isUnique, setIsUnique] = useState(true);
 
     const navigate = useNavigate();
 
+    const checkUniqueUser = (appUser) => {
+        console.log(appUser);
+        getAllUsers()
+            .then((resp) => {
+                console.log(resp.data);
+                const users = resp.data;
+                const userFound = users.find((user) => user.username === appUser);
+                if (userFound) setIsUnique(false);
+                else setIsUnique(true);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
     const handleRegister = (evt) => {
         evt.preventDefault();
-        console.log(evt.target);
+        console.log(evt.target.value);
         setRegisterData({
             ...registerData,
             [evt.target.name]: evt.target.value
@@ -22,11 +39,11 @@ const Register = () => {
     };
 
     const handleUsernameBlur = () => {
-        const isUnique = checkUniqueUser(registerData.username);
+        checkUniqueUser(registerData.username);
         if (!isUnique) {
             setUsernameError('Username already exists. Please choose a different username.');
         } else {
-            setUsernameError('');
+            setUsernameError('username available');
         }
     };
 
@@ -39,6 +56,12 @@ const Register = () => {
         }
     };
 
+    const checkPassword = () => {
+        if (registerData.password !== registerData.confirmPassword)
+            setPasswordError("Password doesn't match. Enter again.");
+        else
+            setPasswordError('');
+    };
     const submitRegister = (evt) => {
         console.log(registerData);
         register(registerData)
@@ -63,6 +86,8 @@ const Register = () => {
             <h1>Register</h1>
             <div>
                 <form onSubmit={submitRegister}>
+
+                    <label for="username">Username:</label>
                     <input
                         type="text"
                         name="username"
@@ -72,7 +97,11 @@ const Register = () => {
                         required
                     />
                     {usernameError && <span className="error-message">{usernameError}</span>}
+
+                    <label for="name">Name:</label>
                     <input type="text" name="name" value={registerData.name} onChange={handleRegister} required />
+                    
+                    <label for="email">Email:</label>
                     <input
                         type="email"
                         name="email"
@@ -82,8 +111,23 @@ const Register = () => {
                         required
                     />
                     {emailError && <span className="error-message">{emailError}</span>}
+
+                    <label for="pincode">Pincode:</label>
                     <input type="number" name="pincode" value={registerData.pincode} onChange={handleRegister} required />
+
+                    <label for="password">Password:</label>
                     <input type="password" name="password" value={registerData.password} onChange={handleRegister} required />
+
+                    <label for="confirmPassword">Confirm password:</label>
+                    <input
+                        type="password"
+                        name="confirmPassword"
+                        value={registerData.confirmPassword}
+                        onChange={handleRegister}
+                        onBlur={checkPassword}
+                        required />
+                    {passwordError && <span className="error-message">{passwordError}</span>}
+
                     <input type="submit" name="register" value="Register" />
                 </form>
             </div>

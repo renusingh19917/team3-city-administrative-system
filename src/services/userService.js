@@ -21,12 +21,17 @@ const logout = () => {
     console.log('logout');
 };
 
-const checkUniqueUser = (appUser) => {
-    console.log(appUser);
-    const users =  axios.get(`${userUrl}`);
-    const userFound = users.find((user) => user.id === appUser.id);
-    if(userFound) return false;
-    return true;
+const getAllUsers = () => {
+    console.log('getAllUsers');
+    return axios.get(userUrl);
 };
 
-export { register, login, updateUser, logout, checkUniqueUser };
+// const checkUniqueUser = (appUser) => {
+//     console.log(appUser);
+//     const users =  axios.get(`${userUrl}`);
+//     const userFound = users.find((user) => user.id === appUser.id);
+//     if(userFound) return false;
+//     return true;
+// };
+
+export { register, login, updateUser, logout, getAllUsers };
