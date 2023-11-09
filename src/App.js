@@ -1,9 +1,15 @@
 import logo from './logo.svg';
+import AppRoutes from "./AppRoutesP";
 import './App.css';
 import AppRoute from './AppRoutesR';
 
-function App() {
-  return <AppRoute />;
-}
+const App = () => {
+
+  return (
+    <div className="App">
+      <AppRoutes />
+    </div>
+  );
+};
 
 export default App;
