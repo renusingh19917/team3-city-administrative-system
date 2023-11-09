@@ -1,7 +1,16 @@
 
+// const Login = () => {
+//     return (
+//         <div>
+//             <h1>Login Page</h1>
+//         </div>
+//     );
+// };
+// export default Login;
 
 import React, { useState } from 'react';
-import AdminService from '../../services/AdminService';
+import userService from '../../services/UserServiceD';
+// import UserService from '../../UserService.js'
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -9,7 +18,7 @@ const Login = () => {
   const [error, setError] = useState(null);
 
   const handleLogin = () => {
-    const loginSuccessful = AdminService.login(username, password);
+    const loginSuccessful = userService.login(username, password);
 
     if (loginSuccessful) {
       console.log('Login successful!');
@@ -33,7 +42,7 @@ const Login = () => {
       <button onClick={handleLogin}>Login</button>
       {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
-  ); 
+  );
 };
 
 export default Login;

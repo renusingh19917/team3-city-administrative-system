@@ -1,9 +1,8 @@
-// import AppUser from "../models/AppUser";
-import AppAdmin from "../models/AppAdmin";
+import AppUser from "../models/AppUser";
 
-class AdminService {
+class UserService {
   // Simulated user data (replace with your actual user data)
-  users = [AppAdmin];
+  users = [AppUser];
 
   // Simulated currently logged-in user (initially null)
   currentUser = null;
@@ -29,6 +28,6 @@ class AdminService {
   }
 }
 
-// const adminService = new AdminService();
+const userService = new UserService();
 
-export default AdminService;
+export default userService;
