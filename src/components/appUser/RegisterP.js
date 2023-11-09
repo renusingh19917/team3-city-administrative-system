@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import AppUser from "../../models/AppUser";
-import { register, getAllUsers } from "../../services/UserService";
+import { register, getAllUsers } from "../../services/UserServiceP";
 
 const Register = () => {
 

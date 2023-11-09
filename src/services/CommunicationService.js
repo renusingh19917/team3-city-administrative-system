@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // const commUrl = 'https://jsonplaceholder.typicode.com/comm';
-const reportUrl = 'https://jsonplaceholder.typicode.com/report';
-const noticeUrl = 'https://jsonplaceholder.typicode.com/notice';
+const reportUrl = '/report';
+const noticeUrl = '/notice';
 
 const getAllReports = (userId) => {
     console.log(userId);
