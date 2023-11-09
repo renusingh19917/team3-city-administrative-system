@@ -12,7 +12,7 @@ import PetitionDetails from './components/appAdmin/PetitionDetails';
 import UserPetition from './components/appUser/UserPetition';
 
 
-function AppRoute() {
+function AppRoutes() {
     const [notices, setNotices] = useState([]);
   
     const addNotice = (notice) => {
@@ -51,4 +51,4 @@ const submitPetition = (petition) => {
   }
   
 
-export default AppRoute;
+export default AppRoutes;
