@@ -2,6 +2,8 @@ import axios from "axios";
 
 const userUrl = 'https://jsonplaceholder.typicode.com/users';
 
+// const userUrl = 'http://localhost:8090/api/users';
+
 const register = (appUser) => {
     console.log(appUser);
     return axios.post(userUrl, appUser);
@@ -15,6 +17,11 @@ const login = (appUser) => {
 const updateUser = (appUser) => {
     console.log(appUser);
     return axios.post(userUrl, appUser);
+};
+
+const deleteUser = (appUser) => {
+    console.log(appUser);
+    return axios.delete(userUrl, appUser);
 };
 
 const logout = () => {
@@ -34,4 +41,4 @@ const getAllUsers = () => {
 //     return true;
 // };
 
-export { register, login, updateUser, logout, getAllUsers };
+export { register, login, updateUser, logout, getAllUsers, deleteUser };

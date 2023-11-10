@@ -14,36 +14,30 @@ const Register = () => {
 
     const navigate = useNavigate();
 
-    const checkUniqueUser = (appUser) => {
-        console.log(appUser);
-        getAllUsers()
-            .then((resp) => {
-                console.log(resp.data);
-                const users = resp.data;
-                const userFound = users.find((user) => user.username === appUser);
-                if (userFound) setIsUnique(false);
-                else setIsUnique(true);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-
-    const handleRegister = (evt) => {
-        evt.preventDefault();
-        console.log(evt.target.value);
-        setRegisterData({
-            ...registerData,
-            [evt.target.name]: evt.target.value
-        });
+    const checkUniqueUser = async (appUser) => {
+        try {
+            const resp = await getAllUsers();
+            const users = resp.data;
+            console.log(users);
+            const userFound = users.find((user) => user.username === appUser);
+            if (userFound) {
+                console.log("user exists!");
+                setIsUnique(false);
+                setUsernameError("Username taken. Please choose a different username.");
+            } else {
+                console.log("user not found!");
+                setIsUnique(true);
+                setUsernameError("");
+            }
+        } catch (err) {
+            console.log(err);
+            setUsernameError("An error occurred while checking username availability. Please try again later.");
+        }
     };
 
     const handleUsernameBlur = () => {
-        checkUniqueUser(registerData.username);
-        if (!isUnique) {
-            setUsernameError('Username already exists. Please choose a different username.');
-        } else {
-            setUsernameError('username available');
+        if (registerData.username.length > 0) {
+            checkUniqueUser(registerData.username);
         }
     };
 
@@ -62,6 +56,16 @@ const Register = () => {
         else
             setPasswordError('');
     };
+
+    const handleRegister = (evt) => {
+        evt.preventDefault();
+        console.log(evt.target.value);
+        setRegisterData({
+            ...registerData,
+            [evt.target.name]: evt.target.value
+        });
+    };
+
     const submitRegister = (evt) => {
         console.log(registerData);
         register(registerData)
@@ -100,7 +104,7 @@ const Register = () => {
 
                     <label for="name">Name:</label>
                     <input type="text" name="name" value={registerData.name} onChange={handleRegister} required />
-                    
+
                     <label for="email">Email:</label>
                     <input
                         type="email"
