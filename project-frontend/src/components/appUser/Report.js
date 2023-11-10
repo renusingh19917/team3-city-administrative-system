@@ -33,16 +33,16 @@ const Report = () => {
     addReport(reportData)
       .then((resp) => {
         console.log(resp);
-        setReportData('');
+        setReportData(new AppReport());
         setFailedReport('');
         console.log('Form submitted:', reportData);
 
         alert('Report registered successfully!');
-        navigate('/home');
+        navigate('/comm');
       })
       .catch((err) => {
         console.log(err);
-        setReportData('');
+        setReportData(new AppReport());
         setFailedReport('Report not successful');
       });
 

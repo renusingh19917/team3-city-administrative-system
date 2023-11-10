@@ -1,12 +1,12 @@
 import axios from "axios";
 
 // const commUrl = 'https://jsonplaceholder.typicode.com/comm';
-const reportUrl = 'http://localhost:4200/reports';
-const noticeUrl = '/notice';
+const reportUrl = 'http://localhost:8090/reports';
+const noticeUrl = 'http://localhost:4200/notices';
 
-const getAllReports = (userId) => {
+const getUserReports = (userId) => {
     console.log(userId);
-    return axios.get(`${reportUrl}/${userId}`);
+    return axios.get(`${reportUrl}/user/${userId}`);
 };
 
 const getAllNotices = () => {
@@ -18,18 +18,20 @@ const addReport = (userReport) => {
     return axios.post(reportUrl, userReport);
 };
 
-const editReport = (reportId, updatedReport) => {
+const editReportUrl = 'http://localhost:8090/update-report';
+const editReport = (updatedReport) => {
     console.log(updatedReport);
-    return axios.post(`${reportUrl}/${reportId}`, updatedReport);
+    return axios.post(editReportUrl, updatedReport);
 };
 
+const deleteReportUrl = 'http://localhost:8090/delete-report';
 const deleteReport = (reportId) => {
-    return axios.delete(`${reportUrl}/${reportId}`);
+    return axios.delete(`${deleteReportUrl}/${reportId}`);
 };
 
-const addNotice = (adminNotice) => {
-    console.log(adminNotice);
-    return axios.post(noticeUrl, adminNotice);
-};
+// const addNotice = (adminNotice) => {
+//     console.log(adminNotice);
+//     return axios.post(noticeUrl, adminNotice);
+// };
 
-export { getAllReports, getAllNotices, addReport, addNotice, editReport, deleteReport };
+export { getUserReports, getAllNotices, addReport, editReport, deleteReport };

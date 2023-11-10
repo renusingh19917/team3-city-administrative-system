@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router";
 
 import { editReport } from "../../services/CommunicationService";
 
 
-const EditReportForm = ({ report }) => {
-    const navigate = useNavigate();
+const EditReportForm = ({ report, onClose, onEditSuccess }) => {
 
     const [updatedReport, setUpdatedReport] = useState({ ...report });
 
@@ -15,17 +13,18 @@ const EditReportForm = ({ report }) => {
     };
 
     const handleCancel = () => {
-        alert('Changes cancelled. Redirecting to communication page..');
-        navigate('/comm');
+        alert('Changes cancelled. Closing the modal..');
+        onClose();
     };
 
     const handleSave = () => {
-        editReport(report.id, updatedReport)
+        editReport(updatedReport)
             .then(response => {
                 // Handle successful edit
                 alert('Report edited successfully:');
                 console.log(response.data);
-                navigate('/comm');
+                onClose();
+                onEditSuccess(updatedReport);
             })
             .catch(error => {
                 // Handle error
@@ -36,7 +35,6 @@ const EditReportForm = ({ report }) => {
 
     return (
         <div className="edit-report-form">
-            <h2>Edit Report</h2>
             <form>
                 <div>
                     <label>

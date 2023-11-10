@@ -19,26 +19,24 @@ const Login = () => {
 
     const submitLogin = (evt) => {
         console.log(loginData);
-        login(loginData)
+        login(loginData.username)
             .then((resp) => {
-                console.log("in login resp- " + resp);
-                if (resp.data[0].username === loginData.username && resp.data[0].username === loginData.password) {
+                if (resp.data.username === loginData.username && resp.data.password === loginData.password) {
                     localStorage.setItem('loggedIn', true);
-                    localStorage.setItem('currentProfile', JSON.stringify(resp.data[0]));
-                    setLoginData('');
-                    setFailedLogin('');
+                    localStorage.setItem('currentProfile', JSON.stringify(resp.data));
                     alert(`Hi ${JSON.parse(localStorage.getItem('currentProfile')).username}! You've logged in successfully. Redirecting you to home...`);
+                    setLoginData(new AppUser());
+                    setFailedLogin('');
                     navigate('/home');
-                }
-                else {
-                    setLoginData('');
+                } else {
+                    setLoginData(new AppUser());
                     setFailedLogin('Invalid credentials!');
                 }
             })
             .catch((err) => {
                 console.log(err);
-                setLoginData('');
-                setFailedLogin('Invalid credentials!');
+                setFailedLogin('Some error occurred. Login again !');
+                setLoginData(new AppUser());
                 localStorage.setItem('loggedIn', false);
                 localStorage.removeItem('currentProfile');
             });

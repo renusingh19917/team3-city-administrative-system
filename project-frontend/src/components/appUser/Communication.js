@@ -1,33 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 
+import { getUserReports, getAllNotices, deleteReport } from "../../services/CommunicationService";
 import EditReportForm from './EditReportForm';
-import { getAllReports, getAllNotices, deleteReport } from "../../services/CommunicationService";
 
 const Communication = () => {
     const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
     const currentUser = JSON.parse(localStorage.getItem('currentProfile'));
 
     const [notices, setNotice] = useState([]);
-    const [suggestions, setSuggestions] = useState([]);
-    const [complaints, setComplaints] = useState([]);
+    const [reports, setReports] = useState([]);
+    const [selectedReport, setSelectedReport] = useState(null);
 
     useEffect(() => {
         if (isLoggedIn) {
 
-            getAllReports(currentUser.id)
+            getUserReports(currentUser.id)
                 .then((resp) => {
                     console.log(resp.data);
                     const reports = resp.data;
-                    const complaint = reports.filter((report) => report.type === "complaint");
-                    const suggestion = reports.filter((report) => report.type === "suggestion");
-                    setComplaints(complaint);
-                    setSuggestions(suggestion);
+                    setReports(reports);
                 })
                 .catch((err) => {
                     console.log(err);
-                    setComplaints([]);
-                    setSuggestions([]);
+                    setReports([]);
                 });
 
             getAllNotices()
@@ -42,23 +38,34 @@ const Communication = () => {
         }
     }, []);
 
-    const handleEditReport = (editReport) => {
-        <EditReportForm report={editReport} />
-        // <Link to="/edit-report">login</Link> 
+    const handleEditReport = (report) => {
+        setSelectedReport(report);
     };
 
+    const handleEditSuccess = (editedReport) => {
+        // Update the local state with the edited report
+        setReports((prevReports) =>
+          prevReports.map((report) =>
+            report.id === editedReport.id ? editedReport : report
+          )
+        );
+      };
+
     const handleDeleteReport = (report) => {
-        deleteReport(report.id)
-            .then(response => {
-                // Handle successful deletion
-                alert('Report deleted successfully:');
-                console.log(response.data);
-            })
-            .catch(error => {
-                // Handle error
-                alert('Error deleting report:');
-                console.error(error);
-            });
+        const reportId = report.id;
+        if (window.confirm('Are you sure you want to delete this report?')) {
+            deleteReport(reportId)
+                .then(response => {
+                    alert('Report deleted successfully:');
+                    console.log(response.data);
+
+                    setReports((prevReports) => prevReports.filter((report) => report.id !== reportId));
+                })
+                .catch(error => {
+                    alert('Error deleting report:');
+                    console.error(error);
+                });
+        }
     };
 
     return (
@@ -70,35 +77,44 @@ const Communication = () => {
                     <Link to="/report">Report</Link>
 
                     <hr />
-                    <h2>Suggestions:</h2>
+                    <h2>All Reports made by you:</h2>
                     <ul>
-                        {suggestions.map(suggestion => (
-                            <li key={suggestion.id}>
-                                <strong>{suggestion.title}</strong>: {suggestion.description}
-                                <button onClick={handleEditReport(this.suggestion)}>Edit</button>
-                                <button onClick={handleDeleteReport(this.suggestion)}>Delete</button>
+                        {reports.map(report => (
+                            <li key={report.id}>
+                                <p>{report.type}</p>
+                                <strong>{report.title}</strong>
+                                <p>{report.description}</p> 
+                                <button onClick={() => handleEditReport(report)}>Edit</button>
+                                <button onClick={() => handleDeleteReport(report)}>Delete</button>
                             </li>
                         ))}
                     </ul>
 
-                    <h2>Complaints:</h2>
-                    <ul>
-                        {complaints.map(complaint => (
-                            <li key={complaint.id}>
-                                <strong>{complaint.title}</strong>: {complaint.description}
-                                <button onClick={handleEditReport(this.complaint)}>Edit</button>
-                                <button onClick={handleDeleteReport(this.complaint)}>Delete</button>
-                            </li>
-                        ))}
-                    </ul>
+                    {/* Display the EditReportForm as a modal when selectedReport is not null */}
+                    {selectedReport && (
+                        <div className="edit-report-modal">
+                            <div className="modal-content">
+                                <span className="close" onClick={() => setSelectedReport(null)}>
+                                    &times;
+                                </span>
+                                <h2>Edit Report</h2>
+                                <EditReportForm
+                                    report={selectedReport}
+                                    onClose={() => setSelectedReport(null)}
+                                    onEditSuccess={handleEditSuccess}
+                                />
+                            </div>
+                        </div>
+                    )}
 
                     <h2>Notices by the city:</h2>
                     <ul>
                         {notices.map(notice => (
                             <li key={notice.id}>
-                                <strong>{notice.title}</strong>: {notice.content}
-                                <p>Issued by: {notice.issuedBy}</p>
-                                <p>Issued at: {notice.issuedAt}</p>
+                                <strong>{notice.title}</strong>
+                                <p>{notice.content}</p>
+                                {/* <p>Issued by: {notice.issuedBy}</p> */}
+                                <p>Issued on: {notice.issuedOn}</p>
                             </li>
                         ))}
                     </ul>

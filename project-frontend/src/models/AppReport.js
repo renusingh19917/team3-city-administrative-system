@@ -6,7 +6,7 @@ class AppReport {
     description;
     status;
     userId;
-    solution;
+    solution = 'no solution yet';
 }
 
 export default AppReport;

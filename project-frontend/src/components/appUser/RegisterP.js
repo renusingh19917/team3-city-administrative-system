@@ -10,7 +10,6 @@ const Register = () => {
     const [usernameError, setUsernameError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const [isUnique, setIsUnique] = useState(true);
 
     const navigate = useNavigate();
 
@@ -22,11 +21,9 @@ const Register = () => {
             const userFound = users.find((user) => user.username === appUser);
             if (userFound) {
                 console.log("user exists!");
-                setIsUnique(false);
                 setUsernameError("Username taken. Please choose a different username.");
             } else {
                 console.log("user not found!");
-                setIsUnique(true);
                 setUsernameError("");
             }
         } catch (err) {
@@ -36,7 +33,7 @@ const Register = () => {
     };
 
     const handleUsernameBlur = () => {
-        if (registerData.username.length > 0) {
+        if (registerData.username) {
             checkUniqueUser(registerData.username);
         }
     };
@@ -59,31 +56,37 @@ const Register = () => {
 
     const handleRegister = (evt) => {
         evt.preventDefault();
-        console.log(evt.target.value);
+        const { name, value } = evt.target;
+        if (!name || value === undefined) {
+            return;
+        }
         setRegisterData({
             ...registerData,
-            [evt.target.name]: evt.target.value
+            [name]: value,
         });
     };
 
-    const submitRegister = (evt) => {
-        console.log(registerData);
-        register(registerData)
-            .then((resp) => {
-                if (resp.data[0].username) {
-                    setRegisterData('');
-                    setFailedRegister('');
-                    alert(`Hi ${resp.data[0].username}! You've registered successfully. Redirecting you to login page...`);
-                    navigate('/login');
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                setRegisterData('');
-                setFailedRegister('Please ensure that data you enter is accurate.');
-            });
+    const submitRegister = async (evt) => {
         evt.preventDefault();
+    
+        try {
+            const resp = await register(registerData);
+    
+            if (resp.data.username && resp.status === 201) {
+                alert(`Hi ${resp.data.username}! You've registered successfully. Redirecting you to login page...`);
+                setRegisterData(new AppUser());
+                setFailedRegister('');
+                navigate('/login');
+            } else {
+                setFailedRegister('Please ensure that the data you enter is accurate.');
+            }
+        } catch (err) {
+            console.error(err);
+            setRegisterData(new AppUser());
+            setFailedRegister('An error occurred during registration. Please try again.');
+        }
     };
+    
 
     return (
         <div>
