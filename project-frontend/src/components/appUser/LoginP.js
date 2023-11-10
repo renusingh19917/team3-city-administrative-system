@@ -21,7 +21,8 @@ const Login = () => {
         console.log(loginData);
         login(loginData)
             .then((resp) => {
-                if (resp.data[0].username === loginData.username && resp.data[0].website === loginData.password) {
+                console.log("in login resp- " + resp);
+                if (resp.data[0].username === loginData.username && resp.data[0].username === loginData.password) {
                     localStorage.setItem('loggedIn', true);
                     localStorage.setItem('currentProfile', JSON.stringify(resp.data[0]));
                     setLoginData('');
