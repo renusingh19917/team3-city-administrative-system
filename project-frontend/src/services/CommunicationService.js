@@ -2,6 +2,8 @@ import axios from "axios";
 
 // const commUrl = 'https://jsonplaceholder.typicode.com/comm';
 const reportUrl = 'http://localhost:4200/reports';
+// const reportUrl = '/report';
+
 const noticeUrl = '/notice';
 
 const getAllReports = (userId) => {
@@ -14,7 +16,7 @@ const getAllNotices = () => {
 };
 
 const addReport = (userReport) => {
-    console.log(userReport);
+    console.log("call",userReport,reportUrl);
     return axios.post(reportUrl, userReport);
 };
 

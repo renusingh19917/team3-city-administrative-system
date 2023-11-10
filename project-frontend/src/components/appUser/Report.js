@@ -16,7 +16,7 @@ const Report = () => {
 
   const handleInputChange = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
+    console.log("e",e.target.value);
     setReportData({
       ...reportData,
       [e.target.name]: e.target.value
@@ -26,6 +26,7 @@ const Report = () => {
   const handleSubmit = (e) => {
 
     reportData.status = 'pending review';  //initial status of the report
+    reportData.soltution= 'none';
     reportData.userId = currentUser.id;   //current user's id
 
     console.log(reportData);

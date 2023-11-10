@@ -1,8 +1,7 @@
 
-// NoticeList.js
-import React, { useEffect, useState ,Link} from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getAllNotices } from '../../services/AdminCommunicationService';
-import { useNavigate } from 'react-router';
 
 
 function NoticeList() {
@@ -11,14 +10,12 @@ function NoticeList() {
   useEffect(() => {
     getAllNotices()
       .then((response) => {
-        setNotices(response.data); // Update the state with fetched notices
+        setNotices(response.data); 
       })
       .catch((error) => {
         console.error('Error fetching notices:', error);
       });
   }, []);
-
-
 
   return (
         <div>
@@ -26,10 +23,7 @@ function NoticeList() {
           <ul>
             {notices.map((notice, index) => (
               <li key={index}>
-                 {/* <Link to={`notice-details/${notice.id}`}><p>{notice.title}</p></Link> */}
-                <h3>{notice.title}</h3>
-                {/* <p>{notice.content}</p>
-                <p>{notice.issuedOn}</p> */}
+                 <Link to={`/notice-details/${notice.id}`}><p>{notice.title}</p></Link>
                </li>
             ))}
           </ul>

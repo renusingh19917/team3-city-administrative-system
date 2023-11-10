@@ -1,4 +1,3 @@
-// AdminNotice.js
 import React, { useState } from 'react';
 import { addNotice } from '../../services/AdminCommunicationService';
 
