@@ -5,8 +5,8 @@ class AppReport {
     title;
     description;
     status;
+    userId;
     solution;
-    userId
 }
 
 export default AppReport;
