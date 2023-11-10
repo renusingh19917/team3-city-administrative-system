@@ -3,8 +3,8 @@ class AppNotice {
     id;
     title;
     content;
-    issuedBy;
-    issuedAt
+    issuedOn
+    // issuedAt
 }
 
 export default AppNotice;

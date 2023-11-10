@@ -1,7 +1,7 @@
 import logo from './logo.svg';
-import AppRoutes from "./AppRoutes";
+// import AppRoutes from "./AppRoutes";
 import './App.css';
-import AppRoute from './AppRoutesR';
+import AppRoutes from './AppRoutesR';
 
 const App = () => {
 

@@ -5,6 +5,7 @@ class AppReport {
     title;
     description;
     status;
+    solution;
     userId
 }
 

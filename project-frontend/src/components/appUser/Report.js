@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import AppReport from '../../models/AppReport';
 import { addReport } from "../../services/CommunicationService";
 
-const ReportForm = () => {
+const Report = () => {
   const navigate = useNavigate();
 
   const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
@@ -52,7 +52,7 @@ const ReportForm = () => {
 
   return (
     <div className="report-form">
-      {isLoggedIn ? (
+      {/* {isLoggedIn ? ( */}
         <>
           <h2>Submit a Report</h2>
           <form onSubmit={handleSubmit}>
@@ -104,15 +104,16 @@ const ReportForm = () => {
           </form>
           <p>{failedReport}</p>
         </>
-      ) : (
+      {/* ) */}
+       {/* : (
         <>
           <h1>Login First</h1>
           <p>Please <Link to="/login">login</Link> to access the Report page.</p>
         </>
-      )
-      }
+      ) */}
+      {/* } */}
     </div>
   );
 };
 
-export default ReportForm;
+export default Report;

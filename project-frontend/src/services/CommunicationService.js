@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const commUrl = 'https://jsonplaceholder.typicode.com/comm';
-const reportUrl = '/report';
+const reportUrl = 'http://localhost:4200/reports';
 const noticeUrl = '/notice';
 
 const getAllReports = (userId) => {
