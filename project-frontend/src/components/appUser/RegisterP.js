@@ -10,7 +10,6 @@ const Register = () => {
     const [usernameError, setUsernameError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const [isUnique, setIsUnique] = useState(true);
 
     const navigate = useNavigate();
 
@@ -22,11 +21,9 @@ const Register = () => {
             const userFound = users.find((user) => user.username === appUser);
             if (userFound) {
                 console.log("user exists!");
-                setIsUnique(false);
                 setUsernameError("Username taken. Please choose a different username.");
             } else {
                 console.log("user not found!");
-                setIsUnique(true);
                 setUsernameError("");
             }
         } catch (err) {
@@ -36,7 +33,7 @@ const Register = () => {
     };
 
     const handleUsernameBlur = () => {
-        if (registerData.username.length > 0) {
+        if (registerData.username) {
             checkUniqueUser(registerData.username);
         }
     };
@@ -59,37 +56,43 @@ const Register = () => {
 
     const handleRegister = (evt) => {
         evt.preventDefault();
-        console.log(evt.target.value);
+        const { name, value } = evt.target;
+        if (!name || value === undefined) {
+            return;
+        }
         setRegisterData({
             ...registerData,
-            [evt.target.name]: evt.target.value
+            [name]: value,
         });
     };
 
-    const submitRegister = (evt) => {
-        console.log(registerData);
-        register(registerData)
-            .then((resp) => {
-                if (resp.data[0].username) {
-                    setRegisterData('');
-                    setFailedRegister('');
-                    alert(`Hi ${resp.data[0].username}! You've registered successfully. Redirecting you to login page...`);
-                    navigate('/login');
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                setRegisterData('');
-                setFailedRegister('Please ensure that data you enter is accurate.');
-            });
+    const submitRegister = async (evt) => {
         evt.preventDefault();
+    
+        try {
+            const resp = await register(registerData);
+    
+            if (resp.data.username && resp.status === 201) {
+                alert(`Hi ${resp.data.username}! You've registered successfully. Redirecting you to login page...`);
+                setRegisterData(new AppUser());
+                setFailedRegister('');
+                navigate('/login');
+            } else {
+                setFailedRegister('Please ensure that the data you enter is accurate.');
+            }
+        } catch (err) {
+            console.error(err);
+            setRegisterData(new AppUser());
+            setFailedRegister('An error occurred during registration. Please try again.');
+        }
     };
+    
 
     return (
-        <div>
-            <h1>Register</h1>
-            <div>
-                <form onSubmit={submitRegister}>
+        <div style={styles.container}>
+            <h1 style={styles.title}>Register</h1>
+            <div style={styles.formContainer}>
+                <form onSubmit={submitRegister} style={styles.form}>
 
                     <label for="username">Username:</label>
                     <input
@@ -132,12 +135,61 @@ const Register = () => {
                         required />
                     {passwordError && <span className="error-message">{passwordError}</span>}
 
-                    <input type="submit" name="register" value="Register" />
+                    <input type="submit" name="register" value="Register" style={styles.submitButton}/>
                 </form>
             </div>
-            <p>{failedRegister}</p>
+            <p style={styles.errorMessage}>{failedRegister}</p>
         </div>
     );
+};
+
+
+const styles = {
+    container: {
+        maxWidth: '400px',
+        margin: 'auto',
+        padding: '20px',
+        borderRadius: '8px',
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        backgroundColor: '#fff',
+    },
+    title: {
+        textAlign: 'center',
+        marginBottom: '20px',
+        color: '#333',
+    },
+    formContainer: {
+        marginBottom: '20px',
+    },
+    form: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    inputField: {
+        marginBottom: '15px',
+        padding: '8px',
+        borderRadius: '4px',
+        border: '1px solid #ccc',
+        fontSize: '14px',
+    },
+    error: {
+        color: 'red',
+        fontSize: '12px',
+        marginTop: '5px',
+    },
+    submitButton: {
+        backgroundColor: '#4caf50',
+        color: '#fff',
+        padding: '10px',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        fontSize: '16px',
+    },
+    errorMessage: {
+        color: 'red',
+        textAlign: 'center',
+        fontSize: '14px',
+    },
 };
 
 export default Register;

@@ -16,7 +16,7 @@ const Report = () => {
 
   const handleInputChange = (e) => {
     e.preventDefault();
-    console.log("e",e.target.value);
+    console.log("e", e.target.value);
     setReportData({
       ...reportData,
       [e.target.name]: e.target.value
@@ -26,7 +26,7 @@ const Report = () => {
   const handleSubmit = (e) => {
 
     reportData.status = 'pending review';  //initial status of the report
-    reportData.soltution= 'none';
+    reportData.soltution = 'none';
     reportData.userId = currentUser.id;   //current user's id
 
     console.log(reportData);
@@ -34,16 +34,16 @@ const Report = () => {
     addReport(reportData)
       .then((resp) => {
         console.log(resp);
-        setReportData('');
+        setReportData(new AppReport());
         setFailedReport('');
         console.log('Form submitted:', reportData);
 
         alert('Report registered successfully!');
-        navigate('/home');
+        navigate('/comm');
       })
       .catch((err) => {
         console.log(err);
-        setReportData('');
+        setReportData(new AppReport());
         setFailedReport('Report not successful');
       });
 
@@ -52,69 +52,106 @@ const Report = () => {
   };
 
   return (
-    <div className="report-form">
-      {/* {isLoggedIn ? ( */}
-        <>
-          <h2>Submit a Report</h2>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>Type:</label>
-              <input
-                type="radio"
-                name="type"
-                id="complaint"
-                value="complaint"
-                checked={reportData.type === 'complaint'}
-                onChange={handleInputChange}
-                required
-              />
-              <label for="complaint">Complaint</label>
-              <input
-                type="radio"
-                name="type"
-                id="suggestion"
-                value="suggestion"
-                checked={reportData.type === 'suggestion'}
-                onChange={handleInputChange}
-                required
-              />
-              <label for="suggestion">Suggestion</label>
-            </div>
+    <div className="report-form" style={styles.container}>
+      <>
+        <h2 style={styles.heading}>Submit a Report</h2>
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <div style={styles.radioGroup}>
+            <label>Type:</label>
+            <input
+              type="radio"
+              name="type"
+              id="complaint"
+              value="complaint"
+              checked={reportData.type === 'complaint'}
+              onChange={handleInputChange}
+              required
+            />
+            <label htmlFor="complaint" style={styles.radioLabel}>Complaint</label>
+            <input
+              type="radio"
+              name="type"
+              id="suggestion"
+              value="suggestion"
+              checked={reportData.type === 'suggestion'}
+              onChange={handleInputChange}
+              required
+            />
+            <label htmlFor="suggestion" style={styles.radioLabel}>Suggestion</label>
+          </div>
 
-            <div>
-              <label>Title:</label>
-              <input
-                type="text"
-                name="title"
-                value={reportData.title}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div>
-              <label>Description:</label>
-              <textarea
-                name="description"
-                value={reportData.description}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
+          <div style={styles.inputGroup}>
+            <label>Title:</label>
+            <input
+              type="text"
+              name="title"
+              value={reportData.title}
+              onChange={handleInputChange}
+              required
+              style={styles.inputField}
+            />
+          </div>
+          <div style={styles.inputGroup}>
+            <label>Description:</label>
+            <textarea
+              name="description"
+              value={reportData.description}
+              onChange={handleInputChange}
+              required
+              style={styles.inputField}
+            />
+          </div>
 
-            <button type="submit">Submit</button>
-          </form>
-          <p>{failedReport}</p>
-        </>
-      {/* ) */}
-       {/* : (
-        <>
-          <h1>Login First</h1>
-          <p>Please <Link to="/login">login</Link> to access the Report page.</p>
-        </>
-      ) */}
-      {/* } */}
+          <button type="submit" style={styles.submitButton}>Submit</button>
+        </form>
+        <p style={styles.failedReport}>{failedReport}</p>
+      </>
     </div>
   );
 };
 
 export default Report;
+
+const styles = {
+  container: {
+    width: '60%',
+    margin: 'auto',
+    paddingTop: '20px',
+  },
+  heading: {
+    textAlign: 'center',
+    fontSize: '24px',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: '20px',
+  },
+  radioGroup: {
+    marginBottom: '10px',
+  },
+  radioLabel: {
+    marginLeft: '5px',
+  },
+  inputGroup: {
+    marginBottom: '15px',
+  },
+  inputField: {
+    width: '100%',
+    padding: '8px',
+    boxSizing: 'border-box',
+  },
+  submitButton: {
+    background: '#4CAF50',
+    color: 'white',
+    padding: '10px',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    fontSize: '16px',
+  },
+  failedReport: {
+    color: 'red',
+    textAlign: 'center',
+  },
+};

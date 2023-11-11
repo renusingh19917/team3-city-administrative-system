@@ -1,27 +1,31 @@
 import axios from "axios";
 
-const userUrl = 'https://jsonplaceholder.typicode.com/users';
+// const userUrl = 'https://jsonplaceholder.typicode.com/users';
 
-// const userUrl = 'http://localhost:8090/api/users';
+const userUrl = 'http://localhost:8090/users';
 
 const register = (appUser) => {
     console.log(appUser);
     return axios.post(userUrl, appUser);
 };
 
-const login = (appUser) => {
-    console.log(appUser);
-    return axios.get(`${userUrl}/?username=${appUser.username}`);
+const login = (username) => {
+    console.log(username);
+    return axios.get(`${userUrl}/${username}`);
 };
+
+const userUpdateUrl = 'http://localhost:8090/update-user';
 
 const updateUser = (appUser) => {
     console.log(appUser);
-    return axios.post(userUrl, appUser);
+    return axios.post(userUpdateUrl, appUser);
 };
+
+const userDeleteUrl = 'http://localhost:8090/delete-user';
 
 const deleteUser = (appUser) => {
     console.log(appUser);
-    return axios.delete(userUrl, appUser);
+    return axios.delete(`${userDeleteUrl}/${appUser.id}`);
 };
 
 const logout = () => {

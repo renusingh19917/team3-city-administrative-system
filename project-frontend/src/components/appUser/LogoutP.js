@@ -18,12 +18,30 @@ const Logout = () => {
         }
     };
 
-    return (
-        <div>
-            <h1>Logout</h1>
-            <button onClick={logoutFromHere} >Logout</button>
+    const containerStyle = {
+        textAlign: "center",
+        marginTop: "50px",
+      };
+    
+      const buttonStyle = {
+        padding: "10px 20px",
+        fontSize: "16px",
+        cursor: "pointer",
+        backgroundColor: "#ff5c5c",
+        color: "#fff",
+        border: "none",
+        borderRadius: "5px",
+        outline: "none",
+      };
+    
+      return (
+        <div style={containerStyle}>
+          <h1>Logout</h1>
+          <button onClick={logoutFromHere} style={buttonStyle}>
+            Logout
+          </button>
         </div>
-    );
-};
-
-export default Logout;
+      );
+    };
+    
+    export default Logout;
