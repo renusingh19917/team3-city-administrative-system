@@ -14,7 +14,9 @@ const AdminDashboard = () => {
       <Link to="/admin-notice" className="admin-button">Admin Notice</Link>
       <Link to="/notice-list-admin" className="admin-button">Notice List</Link>
       <Link to="/reports" className="admin-button">Report List</Link>
-      {/* <Link to="/report-list-admin" className="admin-button">Report Lists User</Link> */}
+
+      {/* <Link to="/admin-login" className="admin-button">Admin Login</Link> */}
+      {/* <Link to="/admin-logout" className="admin-button">Admin Logout</Link> */}
           
     </div>
   );

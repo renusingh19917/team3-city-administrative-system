@@ -46,9 +46,9 @@ function ReportDetails() {
       <h2>Report No. {report.id}</h2>
             
             <h3>Title: {report.title}</h3>
-            <p>Description: {report.description}</p>
-            <p>Status: {report.status}</p>
-            <p>{report.soltution}</p>
+            <p><b>Description: </b>{report.description}</p>
+            <p><b>Status: </b>{report.status}</p>
+            <p><b>Solution: </b>{report.soltution}</p>
             <textarea
               placeholder="Enter solution"
               value={soltution}

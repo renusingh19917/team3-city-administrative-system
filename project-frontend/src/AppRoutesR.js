@@ -14,6 +14,8 @@ import Home from './components/common/Home';
 import ReportDetails from './components/appAdmin/ReportDetails';
 import ReportsListUser from './components/appUser/ReportListUser';
 import ReportDetailsUser from './components/appUser/ReportDetailsUser';
+import AdminLogin from './components/appAdmin/AdminLogin';
+import AdminLogout from './components/appAdmin/AdminLogout';
 
 
 function AppRoutes() {  
@@ -29,12 +31,10 @@ function AppRoutes() {
            <Route path="reports" element={<ReportsList/>} />
            <Route path="notice-list-admin" element={<NoticeListAdmin/>} />
            <Route path="/report-details/:id" element={<ReportDetails/>} />
-           <Route path="login" element={<Login />} />
+           <Route path="/admin-login" element={<AdminLogin/>} />
            <Route exact path="" element={<Home />} />
-           {/* <Route path="*" element={<Page404 />} /> */}
-           <Route path="logout" element={<Logout />} />
+           <Route path="/admin-logout" element={<AdminLogout />} />
            <Route path="report-list-admin" element={<ReportsListUser/>} />
-           {/* <Route path="/report-detials-user/:id" element={<ReportDetailsUser/>} /> */}
           </Routes>
         </div>
       </BrowserRouter>
