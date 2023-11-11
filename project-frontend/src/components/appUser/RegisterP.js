@@ -89,10 +89,10 @@ const Register = () => {
     
 
     return (
-        <div>
-            <h1>Register</h1>
-            <div>
-                <form onSubmit={submitRegister}>
+        <div style={styles.container}>
+            <h1 style={styles.title}>Register</h1>
+            <div style={styles.formContainer}>
+                <form onSubmit={submitRegister} style={styles.form}>
 
                     <label for="username">Username:</label>
                     <input
@@ -135,12 +135,61 @@ const Register = () => {
                         required />
                     {passwordError && <span className="error-message">{passwordError}</span>}
 
-                    <input type="submit" name="register" value="Register" />
+                    <input type="submit" name="register" value="Register" style={styles.submitButton}/>
                 </form>
             </div>
-            <p>{failedRegister}</p>
+            <p style={styles.errorMessage}>{failedRegister}</p>
         </div>
     );
+};
+
+
+const styles = {
+    container: {
+        maxWidth: '400px',
+        margin: 'auto',
+        padding: '20px',
+        borderRadius: '8px',
+        boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+        backgroundColor: '#fff',
+    },
+    title: {
+        textAlign: 'center',
+        marginBottom: '20px',
+        color: '#333',
+    },
+    formContainer: {
+        marginBottom: '20px',
+    },
+    form: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    inputField: {
+        marginBottom: '15px',
+        padding: '8px',
+        borderRadius: '4px',
+        border: '1px solid #ccc',
+        fontSize: '14px',
+    },
+    error: {
+        color: 'red',
+        fontSize: '12px',
+        marginTop: '5px',
+    },
+    submitButton: {
+        backgroundColor: '#4caf50',
+        color: '#fff',
+        padding: '10px',
+        borderRadius: '4px',
+        cursor: 'pointer',
+        fontSize: '16px',
+    },
+    errorMessage: {
+        color: 'red',
+        textAlign: 'center',
+        fontSize: '14px',
+    },
 };
 
 export default Register;

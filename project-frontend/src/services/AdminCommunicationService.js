@@ -1,4 +1,3 @@
-// NoticeService.js
 import axios from 'axios';
 
 
@@ -25,10 +24,9 @@ const getAllReports = async () => {
     return axios.get(reportsUrl);
 }
 
-// Function to update a report
+
 const updateReport = async (reportId, updatedReport) => {
-  // Update the endpoint based on your API
-  const reportUrl = `http://localhost:4200/reports/${reportId}`; 
+  const reportUrl = `http://localhost:4200/reports/${reportId}`;
 
   return axios.put(reportUrl, updatedReport)
     .then((response) => response.data)

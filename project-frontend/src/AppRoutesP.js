@@ -5,6 +5,13 @@ import Home from "./components/common/Home";
 // import Page404 from "./components/common/Page404";
 // import Toolbar from "./components/common/Toolbar";
 // import Footer from "./components/common/Footer";
+import AdminNotice from './components/appAdmin/AdminNotice';
+import NoticeListUser from './components/appUser/NoticeListUser';
+import NoticeListAdmin from './components/appAdmin/NoticeListAdmin';
+import AdminDashboard from './components/appAdmin/AdminDashboard';
+import NoticeDetails from './components/appAdmin/NoticeDetails';
+import ReportsList from './components/appAdmin/ReportsList';
+import ReportDetails from './components/appAdmin/ReportDetails';
 import Register from "./components/appUser/RegisterP";
 import Login from "./components/appUser/LoginP";
 import Logout from "./components/appUser/LogoutP";
@@ -22,6 +29,13 @@ const AppRoutes = () => {
                     {/* <Toolbar /> */}
                 </div>
                 <Routes>
+                    <Route path="/admin-dashboard" element={<AdminDashboard />} />
+                    <Route path="/admin-notice" element={<AdminNotice />} />
+                    <Route path="/notice-list-user" element={<NoticeListUser />} />
+                    <Route path="/notice-details/:id" element={<NoticeDetails />} />
+                    <Route path="reports" element={<ReportsList />} />
+                    <Route path="notice-list-admin" element={<NoticeListAdmin />} />
+                    <Route path="/report-details/:id" element={<ReportDetails />} />
                     <Route path="home" element={<Home />} />
                     <Route path="register" element={<Register />} />
                     <Route path="login" element={<Login />} />

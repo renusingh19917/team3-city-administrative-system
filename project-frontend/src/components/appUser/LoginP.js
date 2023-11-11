@@ -44,22 +44,65 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <h1>Login</h1>
-            <div>
+        <div style={styles.container}>
+            <h1 style={styles.title}>Login</h1>
+            <div style={styles.formContainer}>
                 <form onSubmit={submitLogin}>
-                    <label for="username">Username:</label>
-                    <input type="text" name="username" value={loginData.username} onChange={handleLogin} />
+                    <label style={styles.label} htmlFor="username">Username:</label>
+                    <input style={styles.input} type="text" name="username" value={loginData.username} onChange={handleLogin} />
 
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" value={loginData.password} onChange={handleLogin} />
+                    <label style={styles.label} htmlFor="password">Password:</label>
+                    <input style={styles.input} type="password" name="password" value={loginData.password} onChange={handleLogin} />
 
-                    <input type="submit" name="login" value="Login" />
+                    <input style={styles.submitButton} type="submit" name="login" value="Login" />
                 </form>
             </div>
-            <p>{failedLogin}</p>
+            <p style={styles.error}>{failedLogin}</p>
         </div>
     );
+};
+
+const styles = {
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+    },
+    formContainer: {
+        width: '300px',
+        padding: '20px',
+        border: '1px solid #ccc',
+        borderRadius: '8px',
+        marginBottom: '20px',
+    },
+    title: {
+        fontSize: '24px',
+        marginBottom: '10px',
+    },
+    label: {
+        marginBottom: '6px',
+    },
+    input: {
+        width: '100%',
+        padding: '8px',
+        marginBottom: '14px',
+        borderRadius: '4px',
+        border: '1px solid #ccc',
+    },
+    submitButton: {
+        backgroundColor: '#4CAF50',
+        color: 'white',
+        padding: '10px',
+        border: 'none',
+        borderRadius: '4px',
+        cursor: 'pointer',
+    },
+    error: {
+        color: 'red',
+        textAlign: 'center',
+    },
 };
 
 export default Login;
