@@ -13,7 +13,7 @@ function ReportDetails() {
 
     useEffect(() => {
         console.log(reportParam.id);
-        axios.get(`http://localhost:4200/reports/${reportParam.id}`)
+        axios.get(`http://localhost:8090/reports/${reportParam.id}`)
             .then((response) => {
                 setReport(response.data);
             })

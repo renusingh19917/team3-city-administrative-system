@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const noticeUrl = 'http://localhost:4200/notices';
-const reportsUrl = 'http://localhost:4200/reports';
+const reportsUrl = 'http://localhost:8090/reports';
 
 
 const addNotice = async(title,content,issuedOn) => {
@@ -37,7 +37,7 @@ const getAllReports = async () => {
 
 
 const updateReport = async (reportId, updatedReport) => {
-  const reportUrl = `http://localhost:4200/reports/${reportId}`;
+  const reportUrl = `http://localhost:8090/reports/${reportId}`;
 
   return axios.put(reportUrl, updatedReport)
     .then((response) => response.data)
@@ -47,4 +47,4 @@ const updateReport = async (reportId, updatedReport) => {
 };
 
 
-export { addNotice, getAllNotices, getAllReports,updateReport };
+export { addNotice, getAllNotices, getAllReports, updateReport, deleteNotice };
