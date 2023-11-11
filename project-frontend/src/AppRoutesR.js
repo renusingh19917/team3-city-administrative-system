@@ -12,6 +12,8 @@ import Login from './components/appUser/LoginP';
 import Logout from './components/appUser/LogoutP';
 import Home from './components/common/Home';
 import ReportDetails from './components/appAdmin/ReportDetails';
+import ReportsListUser from './components/appUser/ReportListUser';
+import ReportDetailsUser from './components/appUser/ReportDetailsUser';
 
 
 function AppRoutes() {  
@@ -31,7 +33,8 @@ function AppRoutes() {
            <Route exact path="" element={<Home />} />
            {/* <Route path="*" element={<Page404 />} /> */}
            <Route path="logout" element={<Logout />} />
-
+           <Route path="report-list-admin" element={<ReportsListUser/>} />
+           {/* <Route path="/report-detials-user/:id" element={<ReportDetailsUser/>} /> */}
           </Routes>
         </div>
       </BrowserRouter>

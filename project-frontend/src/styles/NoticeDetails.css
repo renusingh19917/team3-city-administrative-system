@@ -1,0 +1,21 @@
+
+.notice-details {
+  background-color: #fff; 
+  border: 1px solid #333; 
+  padding: 20px;
+  margin: 20px auto; 
+  width: 50%;
+}
+
+.notice-details h3 {
+  text-align: center;
+  color: #333; 
+}
+
+.notice-details .content {
+  color: #555; 
+}
+
+.notice-details p {
+  color: #777; 
+}

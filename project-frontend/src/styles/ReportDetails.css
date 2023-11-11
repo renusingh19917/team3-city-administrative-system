@@ -1,0 +1,38 @@
+/* ReportDetails.css */
+
+.report-details {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  h2 {
+    color: #333; /* Black */
+  }
+  
+  h3 {
+    color: #333; /* Black */
+  }
+  
+  p {
+    color: #333; /* Black */
+  }
+  
+  textarea {
+    color: #333; /* Black */
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  button {
+    background-color: #333; /* Black */
+    color: #fff; /* White */
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  button:hover {
+    background-color: #555; /* Darker Black */
+  }
+  

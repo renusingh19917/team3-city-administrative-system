@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import {useParams } from 'react-router-dom';
 import axios from 'axios';
+import '../../styles/NoticeDetails.css';
 
 const NoticeDetails = () => {
     const noticeParam = useParams();
@@ -19,10 +20,11 @@ const NoticeDetails = () => {
     }, [noticeParam.id]);
 
   return (
-    <div>
-        <h3>{notice.title}</h3>
-        <p>{notice.content}</p>
-        <p>{notice.issuedOn}</p>
+    <div className='notice-details'>
+        <br></br><br></br>
+        <h3>{notice.title}</h3><br></br>
+        <p className='content'>{notice.content}{notice.content}{notice.content}{notice.content}{notice.content}</p><br></br>
+        <p style={{paddingLeft: "20px"}}>{notice.issuedOn}</p>
     </div>
   );
 };
