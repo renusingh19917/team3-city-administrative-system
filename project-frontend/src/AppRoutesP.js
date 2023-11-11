@@ -2,9 +2,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Home from "./components/common/Home";
-// import Page404 from "./components/common/Page404";
-// import Toolbar from "./components/common/Toolbar";
-// import Footer from "./components/common/Footer";
+import Page404 from "./components/common/Page404";
+import Toolbar from "./components/common/Toolbar";
+import Footer from "./components/common/Footer";
 import AdminNotice from './components/appAdmin/AdminNotice';
 import NoticeListUser from './components/appUser/NoticeListUser';
 import NoticeListAdmin from './components/appAdmin/NoticeListAdmin';
@@ -26,7 +26,7 @@ const AppRoutes = () => {
         <div>
             <BrowserRouter>
                 <div>
-                    {/* <Toolbar /> */}
+                    <Toolbar />
                 </div>
                 <Routes>
                     <Route path="/admin-dashboard" element={<AdminDashboard />} />
@@ -40,14 +40,14 @@ const AppRoutes = () => {
                     <Route path="register" element={<Register />} />
                     <Route path="login" element={<Login />} />
                     <Route exact path="" element={<Home />} />
-                    {/* <Route path="*" element={<Page404 />} /> */}
+                    <Route path="*" element={<Page404 />} />
                     <Route path="logout" element={<Logout />} />
                     <Route path="profile" element={<UserProfile />} />
                     <Route path="report" element={<Report />} />
                     <Route path="comm" element={<Communication />} />
                 </Routes>
                 <div>
-                    {/* <Footer /> */}
+                    <Footer />
                 </div>
             </BrowserRouter>
         </div>
