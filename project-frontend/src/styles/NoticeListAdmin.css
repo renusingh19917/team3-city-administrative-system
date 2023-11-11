@@ -1,0 +1,35 @@
+/* NoticeListAdmin.css */
+
+.notice-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.notice-list-admin {
+  background-color: #f2f2f2; 
+  border: 1px solid #ccc; 
+  margin: 10px;
+  width: calc(100% - 20px); 
+  text-align: center;
+  padding: 10px;
+}
+
+.notice-list-admin p {
+  color: #333; 
+}
+
+.notice-list-admin .notice-link {
+  text-decoration: none;
+  color: #333; 
+  display: block;
+}
+
+.notice-list-admin .notice-link:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  text-align: center; 
+  color: #333;
+}

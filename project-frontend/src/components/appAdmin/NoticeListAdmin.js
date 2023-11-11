@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllNotices } from '../../services/AdminCommunicationService';
+import '../../styles/NoticeListAdmin.css';
 
 
 function NoticeList() {
@@ -16,18 +17,22 @@ function NoticeList() {
         console.error('Error fetching notices:', error);
       });
   }, []);
+ 
 
   return (
-        <div>
-          <h2>Notice List</h2>
-          <ul>
-            {notices.map((notice, index) => (
-              <li key={index}>
-                 <Link to={`/notice-details/${notice.id}`}><p>{notice.title}</p></Link>
-               </li>
-            ))}
-          </ul>
-        </div>
+    <div>
+    <h1>Notice List</h1>
+    <div className='notice-list'>
+      {notices.map((notice, index) => (
+        <div className='notice-list-admin' key={index}>
+          <Link to={`/notice-details/${notice.id}`} className="notice-link">
+            <p>{notice.title}</p>
+          </Link>
+        </div>       
+      ))}
+    </div>  
+  </div>
+       
       );
 }
 

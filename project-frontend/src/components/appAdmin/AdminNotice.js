@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { addNotice } from '../../services/AdminCommunicationService';
+import '../../styles/AdminNotice.css';
 
 
 function AdminNotice({ onAddNotice }) {
@@ -14,7 +15,7 @@ function AdminNotice({ onAddNotice }) {
   
 
   return (
-        <div>
+        <div className='notice-box'>
           <h2>Add a Notice</h2>
           <input
             type="text"

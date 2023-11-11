@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { getAllReports, updateReport } from '../../services/AdminCommunicationService';
 import '../../styles/ReportListAdmin.css';
 
-function ReportsList() {
+function ReportsListUser() {
   const [reports, setReports] = useState([]);
   const [soltution, setSoltution] = useState('');
 
@@ -55,5 +55,5 @@ function ReportsList() {
   );
 }
 
-export default ReportsList;
+export default ReportsListUser;
 

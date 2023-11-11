@@ -4,6 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// const express = require('express');
+// const bodyParser = require('body-parser');
+
+// const app = express();
+
+// Use bodyParser middleware to handle JSON payloads with a 10MB limit
+// app.use(bodyParser.json({ limit: '10mb' }));
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

@@ -1,0 +1,32 @@
+/* ReportsList.css */
+
+.report-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .report-list-admin {
+    background-color: #f2f2f2; /* Light grey */
+    border: 1px solid #ccc; /* Border color */
+    margin: 10px;
+    width: calc(100% - 20px); /* Cover 100% of the page width, considering margins */
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .report-list-admin .report-link {
+    text-decoration: none;
+    color: #333; /* Link color */
+    display: block;
+  }
+  
+  .report-list-admin .report-link:hover {
+    text-decoration: underline;
+  }
+  
+  h2 {
+    text-align: center; 
+    color: #333;
+  }
+  
